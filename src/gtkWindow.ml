@@ -71,6 +71,8 @@ module Window = struct
   external set_default : [>`window] obj -> [>`widget] obj -> unit
       = "ml_gtk_window_set_default"
   (* see gtk.props for others *)
+  external show_uri : ?window:[>`window] obj -> ?timestamp:int32 -> string -> unit
+    = "ml_gtk_show_uri_on_window"
 end
 
 module Dialog = struct

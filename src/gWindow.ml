@@ -94,6 +94,9 @@ let cast_window (w : #widget) =
 let toplevel (w : #widget) =
   try Some (cast_window w#misc#toplevel) with Gobject.Cannot_cast _ -> None
 
+(** WARNING!!! passing a window parameter crashes the process  *)
+let show_uri ?window ?timestamp uri =
+  Window.show_uri ?window:(Option.map (fun w -> w#as_window) window) ?timestamp uri
 
 (** Dialog **)
 

@@ -150,6 +150,9 @@ val window :
 val toplevel : #widget -> window option
 (** return the toplevel window of this widget, if existing *)
 
+val show_uri : ?window:window -> ?timestamp:int32 -> string -> unit
+(** open a uri in the default application with an optional window as parent *)
+
 (** {3 GtkDialog} *)
 
 (** @gtkdoc gtk GtkDialog *)

@@ -24,6 +24,7 @@
 
 #include <string.h>
 #include <gtk/gtk.h>
+#include <gdk/gdktypes.h>
 #ifndef _WIN32
 #include <gtk/gtkx.h>
 #endif
@@ -973,3 +974,19 @@ Unsupported_212(gtk_tooltip_set_custom)
 Unsupported_212(gtk_tooltip_trigger_tooltip_query)
 Unsupported_212(gtk_tooltip_set_tip_area)
 #endif /* HASGTK212 */
+
+/* gtkshow.h */
+// GDK_AVAILABLE_IN_3_22
+// gboolean gtk_show_uri_on_window (GtkWindow   *parent,
+//                                  const char  *uri,
+//                                  guint32      timestamp,
+//                                  GError     **error);
+CAMLprim value ml_gtk_show_uri_on_window(value w, value t, value u)
+{
+  GError *err = NULL;
+  guint32 tparam = (t != Val_unit ? Int32_val(t) : GDK_CURRENT_TIME);
+  GtkWindow *win = (w != Val_unit ? GtkWindow_val(w) : NULL);
+  gtk_show_uri_on_window(win, String_val(u), tparam, &err);
+  if (err) ml_raise_gerror(err);
+  return Val_unit;
+}
